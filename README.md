@@ -16,6 +16,10 @@ This is a full-stack blog application built using **Django (DRF)** for the backe
 - 🎨 Clean UI with responsive layout<br>
 
 ---
+📄 **Screenshots Preview**  
+For a visual walkthrough of the application (Login, Create Post, View Posts, Comments, Like, etc.), please refer to the above blogapp.pdf.
+
+---
 
 # 🗂️ Folder Structure
 
@@ -26,7 +30,7 @@ blog-app/
 │   └── manage.py
 ├── frontend/      # React frontend (UI)
 │   └── src/
-└── README.md      # You're here!
+└── README.md      
 </pre>
 
 ---
