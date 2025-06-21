@@ -77,6 +77,7 @@ npm start
 
 ## 🗂️ In Depth  Folder Structure
 
+<pre>
 
 blog-app/
 ├── backend/ # Django Backend
@@ -118,7 +119,7 @@ blog-app/
 
 ├── .gitignore
 ├── README.md # Project documentation
-└── screenshots.pdf # UI preview (optional
 
+<pre>
 
 
