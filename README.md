@@ -74,3 +74,51 @@ npm start
 
 **Varshitha GA** – [GitHub Profile](https://github.com/varshithaga)
 
+
+## 🗂️ In Depth  Folder Structure
+
+
+
+blog-app/
+├── backend/ # Django Backend
+│ ├── blog/ # Django App: Core blog logic
+│ │ ├── init.py
+│ │ ├── admin.py # Register models for Django admin
+│ │ ├── apps.py
+│ │ ├── models.py # Post, Comment, Like, Tag models
+│ │ ├── serializers.py # DRF Serializers for all models
+│ │ ├── urls.py # Blog app-level API routes
+│ │ ├── views.py # PostViewSet, CommentViewSet, Auth APIs
+│ │ └── migrations/
+│ │ ├── init.py
+│ │ └── 0001_initial.py
+│ ├── backend/
+│ │ ├── init.py
+│ │ ├── asgi.py
+│ │ ├── settings.py # Django project settings
+│ │ ├── urls.py # Project-level URL config
+│ │ └── wsgi.py
+│ ├── manage.py
+│ └── requirements.txt # Python dependencies
+
+├── frontend/ # React Frontend
+│ ├── public/
+│ │ └── index.html
+│ └── src/
+│ ├── api/
+│ │ └── api.js # Axios API instance
+│ ├── components/
+│ │ ├── Login.js # Login form
+│ │ ├── Signup.js # Signup form
+│ │ ├── PostForm.js # Create a new post
+│ │ ├── PostList.js # List all posts + search
+│ │ ├── PostDetail.js # View single post + like
+│ │ └── CommentSection.js# Add/view comments & replies
+│ ├── App.js # React routing
+│ └── index.js # React root entry
+
+├── .gitignore
+├── README.md # Project documentation
+
+
+
