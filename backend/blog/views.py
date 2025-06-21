@@ -9,7 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
 
 from .models import Post, Comment, Like, Tag
-from .serializers import PostSerializer, CommentSerializer, LikeSerializer, TagSerializer
+from .serializers import PostSerializer, CommentSerializer, LikeSerializer, TagSerializer,UserProfileSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -111,3 +111,9 @@ class LikeViewSet(viewsets.ViewSet):
         count = Like.objects.filter(post=post).count()
         return Response({'liked': liked, 'count': count})
 
+class UserViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request, pk=None):
+        serializer = UserProfileSerializer(request.user)
+        return Response(serializer.data)

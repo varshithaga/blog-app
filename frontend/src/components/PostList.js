@@ -5,10 +5,32 @@ import API from '../api/api';
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [searchTag, setSearchTag] = useState('');
+  const [user, setUser] = useState(null);
+  const [showOnlyMyPosts, setShowOnlyMyPosts] = useState(false);
 
-  const fetchPosts = async (tag = '') => {
+  const fetchUser = async () => {
     try {
-      const res = await API.get(`posts/${tag ? `?tag=${tag}` : ''}`);
+      const userId = localStorage.getItem('user_id');
+      const res = await API.get(`user/${userId}/`);
+      setUser(res.data);
+    } catch (err) {
+      console.error("Error fetching user profile:", err);
+    }
+  };
+
+  const fetchPosts = async (tag = '', onlyMine = false) => {
+    try {
+      let url = `posts/`;
+      const queryParams = [];
+
+      if (tag) queryParams.push(`tag=${tag}`);
+      if (onlyMine && user?.id) queryParams.push(`author=${user.id}`);
+
+      if (queryParams.length > 0) {
+        url += '?' + queryParams.join('&');
+      }
+
+      const res = await API.get(url);
       setPosts(res.data);
     } catch (err) {
       console.error("Error fetching posts:", err);
@@ -16,11 +38,21 @@ const PostList = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      fetchPosts('', showOnlyMyPosts);
+    }
+  }, [user, showOnlyMyPosts]);
+
   const handleSearch = () => {
-    fetchPosts(searchTag.trim());
+    fetchPosts(searchTag.trim(), showOnlyMyPosts);
+  };
+
+  const handleCheckMyPosts = () => {
+    setShowOnlyMyPosts(prev => !prev);
   };
 
   return (
@@ -73,9 +105,17 @@ const PostList = () => {
             </button>
           </div>
 
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {user && (
+              <div style={{ textAlign: 'right', marginRight: '10px', fontSize: '14px' }}>
+                <div><strong>{user.username}</strong></div>
+                <div style={{ fontSize: '12px', color: '#666' }}>{user.email}</div>
+              </div>
+            )}
             <Link to="/create" style={linkBtnStyle}>➕ Create Post</Link>
-            &nbsp;
+            <button onClick={handleCheckMyPosts} style={{ ...linkBtnStyle, backgroundColor: '#f39c12' }}>
+              {showOnlyMyPosts ? '🔁 Show All Posts' : '👤 Check My Posts'}
+            </button>
             <Link to="/login" style={{ ...linkBtnStyle, backgroundColor: '#e74c3c' }}>🔐 Log Out</Link>
           </div>
         </div>
