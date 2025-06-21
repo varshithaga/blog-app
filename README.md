@@ -17,7 +17,7 @@ This is a full-stack blog application built using **Django (DRF)** for the backe
 
 ---
 📄 **Screenshots Preview**  
-For a visual walkthrough of the application (Login, Create Post, View Posts, Comments, Like, etc.), please refer to the above blogapp.pdf.
+For a visual walkthrough of the application (Login, Create Post, View Posts, Comments, Like, etc.), please refer to the above blogapp1.pdf.
 
 ---
 
